@@ -9,13 +9,6 @@ export const fetchByProductsFilters = (
   console.log("keyword From API ", keyword);
   console.log("Filter From API ", filter);
   console.log("sort From API ", sort);
-  // TODO : on server we will suppoet multi value
-  //sort = {_sort:"price",_order:"desc"}
-  // filter = {"categoty" : ["smartphone","laptops"]}
-  // console.log(filter);
-  // custom @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  const keyword2 = null; //"iphone";
-  // custom @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   let queryString = "";
   for (let key in filter) {
     const categoryValues = filter[key];
@@ -38,7 +31,7 @@ export const fetchByProductsFilters = (
     queryString += `keyword=${keyword}&`;
     // console.log(title);
   }
-  console.log("From Product API Pagination", pagination);
+  // console.log("From Product API Pagination", pagination);
   // console.log(admin);
   // console.log(queryString);
   return new Promise(async (resolve) => {
@@ -53,9 +46,8 @@ export const fetchByProductsFilters = (
     resolve({ data: { products: data, totalItems: +totalItems } });
   });
 };
-
 export const fetchKeyWord = (keyword) => {
-  console.log("keyword From API ", keyword);
+  // console.log("keyword From API ", keyword);
   if (keyword) {
     let queryString = "";
     if (keyword) {

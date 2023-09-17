@@ -46,14 +46,7 @@ const router = createBrowserRouter([
       </Protected>
     ),
   },
-  {
-    path: "/ProductPageBySearch",
-    element: (
-      <Protected>
-        <ProductPageBySearch></ProductPageBySearch>
-      </Protected>
-    ),
-  },
+
   {
     path: "/admin",
     element: (
@@ -91,6 +84,14 @@ const router = createBrowserRouter([
     element: (
       <Protected>
         <CheckOutPage></CheckOutPage>
+      </Protected>
+    ),
+  },
+  {
+    path: "/ProductPageBySearch?",
+    element: (
+      <Protected>
+        <ProductPageBySearch></ProductPageBySearch>
       </Protected>
     ),
   },

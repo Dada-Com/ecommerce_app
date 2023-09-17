@@ -40,7 +40,7 @@ export const fetchByProductsFiltersAsync = createAsyncThunk(
       admin
     );
     console.log(keyword);
-    console.log(pagination);
+    // console.log(pagination);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -50,7 +50,7 @@ export const fetchKeyWordAsync = createAsyncThunk(
   "product/fetchKeyWord",
   async (keyword) => {
     const response = await fetchKeyWord(keyword);
-    console.log(keyword);
+    // console.log(keyword);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -121,7 +121,6 @@ export const productSlice = createSlice({
         state.products = action.payload.products;
         state.totalItems = action.payload.totalItems;
       })
-
       .addCase(fetchKeyWordAsync.pending, (state) => {
         state.status = "loading";
       })

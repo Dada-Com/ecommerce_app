@@ -14,7 +14,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MdSearchOff } from "react-icons/md";
 import {
   selectAllProducts,
@@ -76,6 +76,7 @@ export function ProductGrid(props) {
   // console.log(products);
   // Using Custom Hook
   const [filter, setFilter] = useCustomState();
+  // console.log("Filter From Product List : ", filter);
   const [sort, setSort] = useCustomSorts();
 
   const pages = useSelector(selectPage);
@@ -97,9 +98,9 @@ export function ProductGrid(props) {
   //My Code // Using Custom Hook
   const handleFilter = (e, section, option) => {
     const newFilter = { ...filter };
-    console.log(newFilter);
+    // console.log(newFilter);
     if (e.currentTarget.checked) {
-      console.log(e.currentTarget.checked);
+      // console.log(e.currentTarget.checked);
       // dispatch(navsearchFalse());
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -112,9 +113,15 @@ export function ProductGrid(props) {
       );
       newFilter[section.id].splice(index, 1);
     }
-    console.log("Gandu Filter : ", { newFilter });
     setFilter(newFilter);
   };
+  ///// Search Matter @@@@@@@@@@@@@@@@@@@
+  const location = useLocation();
+
+  // You can access query parameters from the location object
+  const queryParams = new URLSearchParams(location.search);
+  const keyword = queryParams.get("key");
+  console.log(keyword);
   // Using Custom Hook
   const handleSort = (e, option) => {
     const sort = { _sort: option.sort, _order: option.order };
@@ -122,13 +129,12 @@ export function ProductGrid(props) {
   };
 
   const handlePage = (pagea) => {
-    console.log("Page form handle page function : ", pagea);
+    // console.log("Page form handle page function : ", pagea);
     dispatch(handlePages(pagea));
   };
-  const keyword = props.name;
   useEffect(() => {
     const pagination = { _page: pages, _limit: ITEMS_PER_PAGE };
-    toast.success(keyword);
+    console.log("useEffect : ", keyword);
     dispatch(
       fetchByProductsFiltersAsync({ filter, keyword, sort, pagination })
     );
@@ -258,6 +264,7 @@ export function ProductGrid(props) {
                                 key={product.id}
                                 to={`/productdetails/${product.id}`}
                               >
+                                {/* {console.log(product.id)} */}
                                 <div className="group relative border-solid border-2 p-2 border-gray-200">
                                   <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                                     <img
@@ -515,103 +522,3 @@ function DesktopFilter({ handleFilter, filters }) {
     </div>
   );
 }
-
-/**
- *
- *
- *
- *
- *
- *
- *                             See The Below Pagination Program Fault
- *
- *
- *
- *
- *
- *
- *
- */
-// function Pagination({
-// handlePage,
-// filters,
-// page,
-// setPage,
-// totalItems,
-// totalPages,
-// }) {
-//   return (
-//     <div>
-//       <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-//         <div className="flex flex-1 justify-between sm:hidden">
-//           <div
-//             onClick={(e) => handlePage(page > 1 ? page - 1 : page)}
-//             className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-//           >
-//             Previous
-//           </div>
-//           <div
-//             onClick={(e) => handlePage(page < totalPages ? page + 1 : page)}
-//             className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-//           >
-//             Next
-//           </div>
-//         </div>
-//         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-//           <div>
-//             <p className="text-sm text-gray-700">
-//               Showing{" "}
-//               <span className="font-medium">
-//                 {(page - 1) * ITEMS_PER_PAGE + 1}
-//               </span>{" "}
-//               to{" "}
-//               <span className="font-medium">
-//                 {page * ITEMS_PER_PAGE > totalItems
-//                   ? totalItems
-//                   : page * ITEMS_PER_PAGE}
-//               </span>{" "}
-//               of <span className="font-medium">{totalItems}</span> results
-//             </p>
-//           </div>
-//           <div>
-//             <nav
-//               className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-//               aria-label="Pagination"
-//             >
-//               <div
-//                 onClick={(e) => handlePage(page > 1 ? page - 1 : page)}
-//                 className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-//               >
-//                 <span className="sr-only">Previous</span>
-//                 <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-//               </div>
-//               {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-//               {Array.from({ length: totalPages }).map((_, index) => (
-//                 <div
-//                   aria-current="page"
-//                   className={`relative cursor-pointer z-10 inline-flex items-center ${
-//                     index + 1 === page
-//                       ? "bg-indigo-600 text-white"
-//                       : "text-gray-400"
-//                   } px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
-//                   onClick={(e) =>
-//                     handlePage(page < totalPages ? page + 1 : page)
-//                   }
-//                 >
-//                   {index + 1}
-//                 </div>
-//               ))}
-//               <div
-//                 onClick={(e) => handlePage(page < totalPages ? page + 1 : page)}
-//                 className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-//               >
-//                 <span className="sr-only">Next</span>
-//                 <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-//               </div>
-//             </nav>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

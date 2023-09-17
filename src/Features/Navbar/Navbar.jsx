@@ -71,13 +71,14 @@ function NavBar({ children }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const keywords = useSelector(selectkeywords);
-  console.log(keywords);
+  // console.log(keywords);
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
   const totalItems = useSelector(selectTotalItems);
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   /// Filter
   const [filter, setFilter] = useCustomState();
+  // console.log("##### Data Filter", filter);
   const [sort, setSort] = useCustomSorts();
   // const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState(null);
@@ -120,13 +121,12 @@ function NavBar({ children }) {
         }
       }
     }
-    console.log({ newFilter });
+    // console.log({ newFilter });
     setFilter(newFilter);
   };
-  console.log(navsearch);
   const handlePage = (page) => {
     setPage(page);
-    console.log("Page", page);
+    // console.log("Page", page);
   };
   useEffect(() => {
     dispatch(fetchCategoriesAsync());
@@ -247,10 +247,13 @@ function NavBar({ children }) {
                                 onSubmit={handleSubmit((data, e) => {
                                   e.preventDefault();
                                   setKeyword(data.searchbarkeyword);
-                                  console.log(data.searchbarkeyword);
+                                  // console.log(data.searchbarkeyword);
+                                  navigate(
+                                    `/ProductPageBySearch?key=${data.searchbarkeyword}`
+                                  );
+                                  dispatch(navsearchTrue());
                                   // console.log(keyword);
                                   reset();
-                                  dispatch(navsearchTrue());
                                 })}
                               >
                                 <label
@@ -265,7 +268,7 @@ function NavBar({ children }) {
                                   <input
                                     {...register("searchbarkeyword", {
                                       onChange: (e) => {
-                                        // handleChange(e);
+                                        e.preventDefault();
                                         dispatch(navsearchFalse());
                                         console.log(e.currentTarget.value);
                                         let wc = e.currentTarget.value;
@@ -324,8 +327,11 @@ function NavBar({ children }) {
                                               {keywords.map((key, index) => (
                                                 <li
                                                   onClick={(e) => {
+                                                    e.preventDefault();
                                                     dispatch(navsearchTrue());
-                                                    setKeyword(key.keyword);
+                                                    navigate(
+                                                      `/ProductPageBySearch?key=${key.keyword}`
+                                                    );
                                                   }}
                                                   key={index}
                                                   className="flex-row items-center gap-x-2 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px dark:bg-gray-800 dark:border-gray-700 dark:text-white"
@@ -348,27 +354,6 @@ function NavBar({ children }) {
                     {/*  */}
                   </div>
                 </div>
-                {/*
-                 <div className="absolute z-10">
-                                    <div>
-                                      <ul className="rounded-lg ">
-                                        {keywords &&
-                                          keywords.map((key, index) => (
-                                            <li
-                                              onClick={(e) => {
-                                                dispatch(navsearchTrue());
-                                                setKeyword(key.keyword);
-                                              }}
-                                              key={index}
-                                              className="flex-row items-center gap-x-2 py-3 px-4  text-sm font-medium bg-white border text-gray-800 -mt-px  dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                                            >
-                                              {key.keyword}
-                                            </li>
-                                          ))}
-                                      </ul>
-                                    </div>
-                                  </div>
-               */}
                 {/* End of search bar */}
                 <div className="lg:ml-20 md:ml-15 sm:mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                   {/* Ecom Logo ------------------------ */}
@@ -398,7 +383,8 @@ function NavBar({ children }) {
                         ) : (
                           <div>
                             <button
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.preventDefault();
                                 dispatch(navsearchFalse());
                                 setKeyword(null);
                                 reset();
@@ -603,11 +589,12 @@ function NavBar({ children }) {
           </header>
 
           <main>
-            {navsearch === false && keyword === null ? (
+            <div className="mx-1   py- sm:px-0 lg:px-0">{children}</div>
+            {/* {navsearch === false && keyword === null ? (
               <div className="mx-1   py- sm:px-0 lg:px-0">{children}</div>
             ) : (
               <ProductGrid name={keyword} />
-            )}
+            )} */}
 
             <Footer></Footer>
           </main>
