@@ -5,10 +5,10 @@ export const fetchByProductsFilters = (
   pagination,
   admin
 ) => {
-  console.log("pagination From API ", pagination);
-  console.log("keyword From API ", keyword);
+  // console.log("pagination From API ", pagination);
+  // console.log("keyword From API ", keyword);
   console.log("Filter From API ", filter);
-  console.log("sort From API ", sort);
+  // console.log("sort From API ", sort);
   let queryString = "";
   for (let key in filter) {
     const categoryValues = filter[key];

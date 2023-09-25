@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+// let filter = [];
 function useCustomState() {
-  const [filter, setFilter] = useState({});
-
-  return [filter, setFilter];
+  const [filters, setFilter] = useState({});
+  // console.log("filter : ", filter);
+  // filter = filters;
+  // console.log("useCustomState Categoty", filter);
+  return [filters, setFilter];
 }
+
 function useCustomSorts() {
   const [sort, setSort] = useState({});
 
@@ -19,4 +23,5 @@ function useCustomSorts() {
 //   return [keyWord, setkeyWord];
 // }  useCustomkeyWord, keyWordMain
 // console.log("keyWordMain", keyWordMain);
+//filter
 export { useCustomState, useCustomSorts };

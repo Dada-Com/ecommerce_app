@@ -103,7 +103,7 @@ function NavBar({ children }) {
     // console.log(section);
     // console.log(option);
     const newFilter = { ...filter };
-    if (selectedCategories) {
+    if (e.currentTarget.value) {
       dispatch(navsearchTrue());
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -121,7 +121,7 @@ function NavBar({ children }) {
         }
       }
     }
-    // console.log({ newFilter });
+    console.log({ newFilter });
     setFilter(newFilter);
   };
   const handlePage = (page) => {
@@ -206,9 +206,12 @@ function NavBar({ children }) {
                                               setSelectedCategories(
                                                 e.currentTarget.value
                                               );
-                                              // console.log(
-                                              //   e.currentTarget.value
-                                              // );
+                                              navigate(
+                                                `/ProductPageBySearch?sectionid=${section.id}&option=${option.value}`
+                                              );
+                                              console.log(
+                                                e.currentTarget.value
+                                              );
                                               // console.log(
                                               //   "From Button Log 1",
                                               //   section.name
@@ -387,6 +390,7 @@ function NavBar({ children }) {
                                 e.preventDefault();
                                 dispatch(navsearchFalse());
                                 setKeyword(null);
+                                navigate("/");
                                 reset();
                                 // toast.success("Back Sucessfully");
                               }}

@@ -37,6 +37,7 @@ import {
   // keyWordMain,
   useCustomSorts,
   useCustomState,
+  // filter,
 } from "../../Common/UseCustomHook";
 import { toast } from "react-toastify";
 const sortOptions = [
@@ -65,7 +66,7 @@ function classNames(...classes) {
  *
  *
  */
-export function ProductGrid(props) {
+export function ProductGrid() {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
   const brands = useSelector(selectBrands);
@@ -76,7 +77,7 @@ export function ProductGrid(props) {
   // console.log(products);
   // Using Custom Hook
   const [filter, setFilter] = useCustomState();
-  // console.log("Filter From Product List : ", filter);
+  // console.log("Filter From Product List : ", filterss);
   const [sort, setSort] = useCustomSorts();
 
   const pages = useSelector(selectPage);
@@ -121,7 +122,30 @@ export function ProductGrid(props) {
   // You can access query parameters from the location object
   const queryParams = new URLSearchParams(location.search);
   const keyword = queryParams.get("key");
-  console.log(keyword);
+  const sectionid = queryParams.get("sectionid");
+  const option = queryParams.get("option");
+  // console.log("sectionid", sectionid);
+  // console.log("option", option);
+
+  useEffect(() => {
+    if (sectionid) {
+      const newFilter = { ...filter };
+      // console.log(newFilter);
+      if (sectionid && option) {
+        // console.log(e.currentTarget.checked);
+        // dispatch(navsearchFalse());
+        if (newFilter[sectionid]) {
+          newFilter[sectionid].push(option);
+        } else {
+          newFilter[sectionid] = [option];
+        }
+      } else {
+        const index = newFilter[sectionid].findIndex((el) => el === option);
+        newFilter[sectionid].splice(index, 1);
+      }
+      setFilter(newFilter);
+    }
+  }, [sectionid, option]);
   // Using Custom Hook
   const handleSort = (e, option) => {
     const sort = { _sort: option.sort, _order: option.order };
@@ -132,13 +156,15 @@ export function ProductGrid(props) {
     // console.log("Page form handle page function : ", pagea);
     dispatch(handlePages(pagea));
   };
+
   useEffect(() => {
     const pagination = { _page: pages, _limit: ITEMS_PER_PAGE };
-    console.log("useEffect : ", keyword);
+    // console.log("useEffect : ", keyword);
+    console.log("useEffect Category filter : ", filter);
     dispatch(
       fetchByProductsFiltersAsync({ filter, keyword, sort, pagination })
     );
-  }, [dispatch, filter, keyword, pages, sort]);
+  }, [dispatch, filter, keyword, pages, sort, sectionid, option]);
 
   useEffect(() => {
     dispatch(fetchBrandsAsync());
@@ -321,7 +347,6 @@ export function ProductGrid(props) {
                   handlePage={handlePage}
                   totalItems={totalItems}
                 ></Pagination>
-                <p>Product Pagination</p>
               </main>
             </div>
           </div>
