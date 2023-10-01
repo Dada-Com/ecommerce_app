@@ -324,9 +324,9 @@ function NavBar({ children }) {
                                   ? navsearch === false && keywords
                                     ? Array.isArray(keywords) &&
                                       keywords.length > 0 && (
-                                        <div className="absolute z-10">
+                                        <div className="absolute z-10 w-80">
                                           <div>
-                                            <ul className="rounded-lg">
+                                            <ul className="rounded-lg w-2/3 lg:w-96">
                                               {keywords.map((key, index) => (
                                                 <li
                                                   onClick={(e) => {

@@ -15,11 +15,33 @@ const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
   const cartLoaded = useSelector(selectCartLoaded);
+  let Totaldiscountprice;
+  {
+    items.map(
+      (item) =>
+        (Totaldiscountprice = Math.round(
+          item.product.price * (1 - item.product.discountPercentage / 100)
+        ))
+    );
+  }
+  // console.log(Totaldiscountprice);
   const totalAmount = items.reduce(
-    (amount, item) => item.product.discountPrice * item.quantity + amount,
+    (amount, item) =>
+      item.product.discountPrice
+        ? item.product.discountPrice * item.quantity + amount
+        : Totaldiscountprice * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  // console.log("totalAmount :", totalAmount);
+  // items.map((item) =>
+  //   console.log(
+  //     "items.product.discountPrice || Totaldiscountprice",
+  //     item.product.discountPrice
+  //       ? item.product.discountPrice * item.quantity
+  //       : Totaldiscountprice * item.quantity
+  //   )
+  // );
 
   const handleQuantity = (e, item) => {
     dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }));
@@ -57,7 +79,15 @@ const Cart = () => {
                             {item.product.name}
                           </Link>
                         </h3>
-                        <p className="ml-4">${item.product.price}</p>
+                        <p className="ml-4">
+                          &#8377;
+                          {item.product.discountPrice
+                            ? item.product.discountPrice
+                            : Math.round(
+                                item.product.price *
+                                  (1 - item.product.discountPercentage / 100)
+                              )}
+                        </p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
                         {item.product.brand}
@@ -73,7 +103,7 @@ const Cart = () => {
                         </label>
                         <select
                           onChange={(e) => handleQuantity(e, item)}
-                          value={item.product.quantity}
+                          value={item.quantity}
                         >
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -114,7 +144,7 @@ const Cart = () => {
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <div className="flex justify-between text-base my-2 font-medium text-gray-900">
             <p>Subtotal</p>
-            <p>$ {totalAmount}</p>
+            <p>&#8377; {totalAmount}</p>
           </div>
           <div className="flex justify-between text-base my-2 font-medium text-gray-900">
             <p>Total Count</p>
@@ -126,7 +156,7 @@ const Cart = () => {
           <div className="mt-6">
             <Link
               to="/checkoutpage"
-              className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700"
             >
               Checkout
             </Link>

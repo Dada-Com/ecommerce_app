@@ -474,7 +474,7 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
                 aria-current="page"
                 className={`relative cursor-pointer z-10 inline-flex items-center ${
                   index + 1 === page
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-gray-600 text-white"
                     : "text-gray-400"
                 } px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
@@ -530,13 +530,13 @@ function ProductGrid({ products }) {
                     </div>
                     <div>
                       <p className="text-sm block font-medium text-gray-900">
-                        $
+                        &#8377;
                         {Math.round(
                           product.price * (1 - product.discountPercentage / 100)
                         )}
                       </p>
                       <p className="text-sm block line-through font-medium text-gray-400">
-                        ${product.price}
+                        &#8377;{product.price}
                       </p>
                     </div>
                   </div>
@@ -555,7 +555,7 @@ function ProductGrid({ products }) {
               <div className="mt-5">
                 <Link
                   to={`/admin/productform/edit/${product.id}`}
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Edit Product
                 </Link>

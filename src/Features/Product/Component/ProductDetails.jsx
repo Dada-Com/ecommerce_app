@@ -156,7 +156,12 @@ export default function AdminProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                &#8377;{product.price}
+                &#8377;
+                {product.discountPrice
+                  ? product.discountPrice
+                  : Math.round(
+                      product.price * (1 - product.discountPercentage / 100)
+                    )}
               </p>
 
               {/* Reviews */}

@@ -39,7 +39,7 @@ export function fetchTopProduts(query) {
 
 export function fetchTopSearch() {
   return new Promise(async (resolve) => {
-    console.log();
+    // console.log();
     const response = await fetch("http://localhost:8080/highlight/top");
     const data = await response.json();
     // console.log("Fetched Top Produts:", data); // Add this line
@@ -48,7 +48,7 @@ export function fetchTopSearch() {
 }
 
 export function updateTopSearch(query) {
-  console.log(query);
+  // console.log(query);
   let id = "64db962d7557b1e9c340a896";
   return new Promise(async (resolve) => {
     try {
@@ -61,7 +61,7 @@ export function updateTopSearch(query) {
         }
       );
       const data = await response.json();
-      console.log("Response from server:", data); // Add this line to log the response
+      // console.log("Response from server:", data); // Add this line to log the response
       resolve({ data });
     } catch (error) {
       console.error(error);
@@ -71,8 +71,8 @@ export function updateTopSearch(query) {
 }
 
 export function updateFlex(imgsrc, id) {
-  console.log(imgsrc);
-  console.log(id);
+  // console.log(imgsrc);
+  // console.log(id);
   return new Promise(async (resolve) => {
     try {
       const response = await fetch("http://localhost:8080/highlight/" + id, {
@@ -81,7 +81,7 @@ export function updateFlex(imgsrc, id) {
         headers: { "content-type": "application/json" },
       });
       const data = await response.json();
-      console.log("Response from server:", data); // Add this line to log the response
+      // console.log("Response from server:", data); // Add this line to log the response
       resolve({ data });
     } catch (error) {
       console.error(error);

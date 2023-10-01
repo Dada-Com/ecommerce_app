@@ -49,7 +49,7 @@ const TopProductEdit = () => {
     return () => {
       slider.destroy();
     };
-  }, []);
+  }, [products]);
 
   return (
     // Top Most Rated Product or most view product etc ------------------------------------------------------------------------------------
@@ -102,9 +102,9 @@ const TopProductEdit = () => {
                           const data = {
                             topsearch: cate.query,
                           };
-                          console.log(data);
+                          // console.log(data);
                           dispatch(updateTopSearchAsync(data));
-                          console.log(cate.query);
+                          // console.log(cate.query);
                         }}
                       >
                         {cate.name}

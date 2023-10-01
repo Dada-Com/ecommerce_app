@@ -79,7 +79,12 @@ export default function SliderCard() {
           <img src="\right-arrow.png" className="w-6 h-6" />
         </button>
       </div>
-      {/* <div
+    </div>
+  );
+}
+
+/*
+{/* <div
         className="absolute bottom-0 flex items-center justify-center w-full gap-2"
         data-glide-el="controls[nav]"
       >
@@ -96,7 +101,5 @@ export default function SliderCard() {
               <span className="block w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-700 focus:outline-none"></span>
             </button>
           ))}
-      </div> */}
-    </div>
-  );
-}
+      </div> 
+*/

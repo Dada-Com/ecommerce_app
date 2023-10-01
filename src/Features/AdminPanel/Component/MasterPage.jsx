@@ -68,13 +68,28 @@ const MasterPage = () => {
     toast.error("Please Select Image Below the Size of 80 Kb");
   }
   useEffect(() => {
-    const slider = new Glide(".glide-01", {
+    if (!highlights) {
+      console.error("Highlights data is missing or undefined.");
+      return;
+    }
+
+    if (!Array.isArray(highlights)) {
+      console.error("Highlights is not an array:", highlights);
+      return;
+    }
+
+    if (highlights.length === 0) {
+      console.warn("Highlights array is empty.");
+      return;
+    }
+
+    const slider = new Glide(".glide-06", {
       type: "slider",
       focusAt: "center",
       perView: 1,
-      //   autoplay: 3000,
+      autoplay: 3000,
       animationDuration: 700,
-      gap: 0,
+      gap: 15,
       classes: {
         nav: {
           active: "[&>*]:bg-wuiSlate-700",
@@ -85,7 +100,8 @@ const MasterPage = () => {
     return () => {
       slider.destroy();
     };
-  }, []);
+  }, [highlights]);
+
   const handleRemove = (e, id) => {
     dispatch(deleteFlexAsync(id));
   };
@@ -153,6 +169,7 @@ const MasterPage = () => {
                 </div>
               </div>
             )}
+            {/* ////////////////  Adding image modu */}
             {previewUrl && (
               <div className="flex-col bg-black h-72">
                 <div className="flex-row">
@@ -218,11 +235,12 @@ const MasterPage = () => {
         </div>
       </div>
       <div className="h-auto ml-7 w-10/12 md:ml-24 lg:ml-32 mt-5 mb-20">
+        {/* ********************************* 01 - 10 - 2023 editing  ********************************************************** */}
         {/*<!-- Component: Slider with controls inside --> */}
-        <div className="relative w-full  h-72 glide-01">
+        <div className="bg-black relative  w-full  h-72 overflow-hidden rounded shadow-xl glide-06 shadow-slate-200">
           {/*    <!-- Slides --> */}
           <div className="overflow-hidden" data-glide-el="track">
-            <ul className="whitespace-no-wrap flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-0">
+            <ul className="whitespace-no-wrap flex-no-wrap relative flex w-full overflow-hidden p-0">
               {highlights &&
                 highlights.map((img) => (
                   <li key={img.id}>

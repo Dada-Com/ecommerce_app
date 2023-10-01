@@ -35,8 +35,20 @@ const CheckOutPage = () => {
   const status = useSelector(selectUserInfoStatus);
   const Orderstatus = useSelector(selectOrderStatus);
   const items = useSelector(selectItems);
+  let Totaldiscountprice;
+  {
+    items.map(
+      (item) =>
+        (Totaldiscountprice = Math.round(
+          item.product.price * (1 - item.product.discountPercentage / 100)
+        ))
+    );
+  }
   const totalAmount = items.reduce(
-    (amount, item) => item.product.discountPrice * item.quantity + amount,
+    (amount, item) =>
+      item.product.discountPrice
+        ? item.product.discountPrice * item.quantity + amount
+        : Totaldiscountprice * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -285,7 +297,7 @@ const CheckOutPage = () => {
                     </button>
                     <button
                       type="submit"
-                      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Add Address
                     </button>
@@ -412,7 +424,17 @@ const CheckOutPage = () => {
                                     {item.product.name}
                                   </Link>
                                 </h3>
-                                <p className="ml-4">${item.product.price}</p>
+                                <p className="ml-4">
+                                  &#8377;
+                                  {item.product.discountPrice
+                                    ? item.product.discountPrice
+                                    : Math.round(
+                                        item.product.price *
+                                          (1 -
+                                            item.product.discountPercentage /
+                                              100)
+                                      )}
+                                </p>
                               </div>
                               <p className="mt-1 text-sm text-gray-500">
                                 {item.product.brand}
@@ -458,7 +480,7 @@ const CheckOutPage = () => {
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex justify-between text-base my-2 font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p>$ {totalAmount}</p>
+                    <p>&#8377; {totalAmount}</p>
                   </div>
                   <div className="flex justify-between text-base my-2 font-medium text-gray-900">
                     <p>Total Count</p>
@@ -470,7 +492,7 @@ const CheckOutPage = () => {
                   <div className="mt-6">
                     <div
                       onClick={handleOrder}
-                      className="flex items-center cursor-pointer justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                      className="flex items-center cursor-pointer justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700"
                     >
                       Order Now
                     </div>

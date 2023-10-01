@@ -55,7 +55,9 @@ const sortOptions = [
     current: false,
   },
 ];
-
+{
+  /* Discount Price CalCulated Manullay Not Edited in whole data base */
+}
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -315,6 +317,7 @@ export function ProductGrid() {
                                         </span>
                                       </p>
                                     </div>
+                                    {/* Discount Price CalCulated Manullay Not Edited in whole data base */}
                                     <div>
                                       <p className="text-sm font-medium  block text-gray-900">
                                         &#8377;

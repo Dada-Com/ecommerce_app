@@ -145,7 +145,7 @@ const adminSlice = createSlice({
       .addCase(addNewFlexAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.highlights.push(action.payload);
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(updateFlexAsync.pending, (state) => {
         state.status = "loading";
@@ -167,8 +167,8 @@ const adminSlice = createSlice({
       //let id = "64db962d7557b1e9c340a896";
       .addCase(updateTopSearchAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        console.log("Payload at line 167:", action.payload);
-        console.log("Payload at line 168:", action.payload);
+        // console.log("Payload at line 167:", action.payload);
+        // console.log("Payload at line 168:", action.payload);
         const index = state.top10category.findIndex(
           (top10categorys) => top10categorys.id === action.payload.id
         );
