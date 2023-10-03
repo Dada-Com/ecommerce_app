@@ -50,7 +50,16 @@ export default function UserOrders() {
                                   {item.product.title}
                                 </Link>
                               </h3>
-                              <p className="ml-4">{item.product.price} Rs</p>
+                              <p className="ml-4">
+                                {item.product.discountPrice
+                                  ? item.product.discountPrice
+                                  : Math.round(
+                                      item.product.price *
+                                        (1 -
+                                          item.product.discountPercentage / 100)
+                                    )}{" "}
+                                Rs
+                              </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
                               {item.product.brand}
@@ -81,7 +90,7 @@ export default function UserOrders() {
                   {order && order.totalAmount !== null ? (
                     <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                       <p> {order.totalAmount} Rs</p>
-                      {console.log(order.totalAmount)}
+                      {/* {console.log(order.totalAmount)} */}
                     </div>
                   ) : (
                     <p>Loading...</p>

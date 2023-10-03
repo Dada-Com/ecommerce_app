@@ -140,7 +140,7 @@ function ProductForm() {
           product.price = +product.price;
           product.stock = +product.stock;
           product.discountPercentage = +product.discountPercentage;
-          console.log(product);
+          // console.log(product);
 
           if (params.id) {
             product.id = params.id;

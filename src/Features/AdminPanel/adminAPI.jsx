@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 export function addNewFlex(item) {
   return new Promise(async (resolve) => {
     try {
-      const response = await fetch("http://localhost:8080/highlight/", {
+      const response = await fetch("/highlight/", {
         method: "POST",
         body: JSON.stringify(item),
         headers: { "content-type": "application/json" },
@@ -20,7 +20,7 @@ export function addNewFlex(item) {
 
 export function fetchHighlights() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/highlight/");
+    const response = await fetch("/highlight/");
     const data = await response.json();
     // console.log("Fetched highlights:", data); // Add this line
     resolve({ data });
@@ -30,7 +30,7 @@ export function fetchHighlights() {
 export function fetchTopProduts(query) {
   return new Promise(async (resolve) => {
     // console.log(query);
-    const response = await fetch("http://localhost:8080/highlight/" + query);
+    const response = await fetch("/highlight/" + query);
     const data = await response.json();
     // console.log("Fetched Top Produts:", data); // Add this line
     resolve({ data });
@@ -40,7 +40,7 @@ export function fetchTopProduts(query) {
 export function fetchTopSearch() {
   return new Promise(async (resolve) => {
     // console.log();
-    const response = await fetch("http://localhost:8080/highlight/top");
+    const response = await fetch("/highlight/top");
     const data = await response.json();
     // console.log("Fetched Top Produts:", data); // Add this line
     resolve({ data });
@@ -52,14 +52,11 @@ export function updateTopSearch(query) {
   let id = "64db962d7557b1e9c340a896";
   return new Promise(async (resolve) => {
     try {
-      const response = await fetch(
-        "http://localhost:8080/highlight/top/" + id,
-        {
-          method: "PATCH",
-          body: JSON.stringify(query),
-          headers: { "content-type": "application/json" },
-        }
-      );
+      const response = await fetch("/highlight/top/" + id, {
+        method: "PATCH",
+        body: JSON.stringify(query),
+        headers: { "content-type": "application/json" },
+      });
       const data = await response.json();
       // console.log("Response from server:", data); // Add this line to log the response
       resolve({ data });
@@ -75,7 +72,7 @@ export function updateFlex(imgsrc, id) {
   // console.log(id);
   return new Promise(async (resolve) => {
     try {
-      const response = await fetch("http://localhost:8080/highlight/" + id, {
+      const response = await fetch("/highlight/" + id, {
         method: "PATCH",
         body: JSON.stringify(imgsrc),
         headers: { "content-type": "application/json" },
@@ -93,13 +90,10 @@ export function updateFlex(imgsrc, id) {
 export function deleteFlex(itemId) {
   return new Promise(async (resolve) => {
     try {
-      const response = await fetch(
-        "http://localhost:8080/highlight/" + itemId,
-        {
-          method: "DELETE",
-          headers: { "content-type": "application/json" },
-        }
-      );
+      const response = await fetch("/highlight/" + itemId, {
+        method: "DELETE",
+        headers: { "content-type": "application/json" },
+      });
       const data = await response.json();
       // TODO: on server it will only return some info of user (not password)
       resolve({ data: { id: itemId } });

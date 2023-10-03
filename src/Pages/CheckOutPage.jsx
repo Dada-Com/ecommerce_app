@@ -67,12 +67,12 @@ const CheckOutPage = () => {
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const handleAddress = (e) => {
     setSelectedAddress(userInfo.addresses[e.target.value]);
-    console.log(selectedAddress);
+    // console.log(selectedAddress);
   };
 
   const handlePayment = (e) => {
     setPaymentMethod(e.target.value);
-    console.log(paymentMethod);
+    // console.log(paymentMethod);
   };
 
   const handleOrder = (e) => {
@@ -131,7 +131,7 @@ const CheckOutPage = () => {
                 className="bg-white px-5 py-8"
                 noValidate
                 onSubmit={handleSubmit((data) => {
-                  console.log(data);
+                  // console.log(data);
                   dispatch(
                     updateUserAsync({
                       ...userInfo,

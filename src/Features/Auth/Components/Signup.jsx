@@ -50,7 +50,7 @@ const Signup = () => {
                   //TODO : this role can be direstil provided by backend
                 })
               );
-              console.log(data);
+              // console.log(data);
             })}
           >
             <div>

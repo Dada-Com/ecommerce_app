@@ -46,11 +46,11 @@ export default function UserProfile() {
     const imageSizeInBytes = previewUrl.length;
     imageSizeInKB = imageSizeInBytes / 1024;
     const imageSizeInMB = imageSizeInKB / 1024;
-    console.log(
-      `Image size: ${imageSizeInBytes} bytes (${imageSizeInKB.toFixed(
-        2
-      )} KB, ${imageSizeInMB.toFixed(2)} MB)`
-    );
+    // console.log(
+    //   `Image size: ${imageSizeInBytes} bytes (${imageSizeInKB.toFixed(
+    //     2
+    //   )} KB, ${imageSizeInMB.toFixed(2)} MB)`
+    // );
   }
   if (imageSizeInKB > 80) {
     setPreviewUrl(null);
@@ -71,7 +71,7 @@ export default function UserProfile() {
     newUser.profileimages = previewUrl;
     newUser.bio = profileUpdate.bio;
     newUser.occupation = profileUpdate.occupation;
-    console.log(newUser.id);
+    // console.log(newUser.id);
     dispatch(updateUser2Async(newUser));
   };
 
@@ -155,9 +155,9 @@ export default function UserProfile() {
                     setEditstatus(false);
                     setPreviewUrl(null);
                     reset();
-                    console.log(
-                      "Here in update block !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                    );
+                    // console.log(
+                    //   "Here in update block !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                    // );
 
                     /*
                     console.log(NewUserData);
@@ -385,7 +385,7 @@ export default function UserProfile() {
               className="bg-white px-5 py-12 mt-12"
               noValidate
               onSubmit={handleSubmit((data) => {
-                console.log(data);
+                // console.log(data);
                 handleAdd(data);
                 reset();
               })}
@@ -582,7 +582,7 @@ export default function UserProfile() {
                   className="bg-white px-5 py-12 mt-12"
                   noValidate
                   onSubmit={handleSubmit((data) => {
-                    console.log(data);
+                    // console.log(data);
                     handleEdit(data, index);
                     reset();
                   })}

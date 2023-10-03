@@ -57,11 +57,11 @@ const MasterPage = () => {
     const imageSizeInBytes = previewUrl.length;
     imageSizeInKB = imageSizeInBytes / 1024;
     const imageSizeInMB = imageSizeInKB / 1024;
-    console.log(
-      `Image size: ${imageSizeInBytes} bytes (${imageSizeInKB.toFixed(
-        2
-      )} KB, ${imageSizeInMB.toFixed(2)} MB)`
-    );
+    // console.log(
+    //   `Image size: ${imageSizeInBytes} bytes (${imageSizeInKB.toFixed(
+    //     2
+    //   )} KB, ${imageSizeInMB.toFixed(2)} MB)`
+    // );
   }
   if (imageSizeInKB > 80) {
     setPreviewUrl(null);
@@ -109,12 +109,12 @@ const MasterPage = () => {
   // console.log("img id", imgid);
   function handleID(id) {
     imgid = id;
-    console.log("Get ID", id);
+    // console.log("Get ID", id);
   }
   const handleupdate = () => {
     const img = { imgsrc: previewUrl };
     const update = { imgsrc: img, id: imgid };
-    console.log("Inside update function", update);
+    // console.log("Inside update function", update);
     dispatch(updateFlexAsync({ ...update }));
     dispatch(updateStatusFalse());
     setPreviewUrl(null);
@@ -261,8 +261,8 @@ const MasterPage = () => {
                             // handleupdate(e, img.id);  // Execute in update upload button
 
                             fileInputRef.current.click();
-                            console.log("updateStatus", updateStatus);
-                            console.log("addStatus", addStatus);
+                            // console.log("updateStatus", updateStatus);
+                            // console.log("addStatus", addStatus);
                           }}
                         >
                           <AiTwotoneEdit

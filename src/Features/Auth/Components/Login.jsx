@@ -44,7 +44,7 @@ const Login = () => {
               dispatch(
                 loginUserAsync({ email: data.email, password: data.password })
               );
-              console.log(data);
+              // console.log(data);
             })}
           >
             <div>

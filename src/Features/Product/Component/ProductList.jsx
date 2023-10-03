@@ -129,6 +129,16 @@ export function ProductGrid() {
   // console.log("sectionid", sectionid);
   // console.log("option", option);
 
+  // Using Custom Hook
+  const handleSort = (e, option) => {
+    const sort = { _sort: option.sort, _order: option.order };
+    setSort(sort);
+  };
+
+  const handlePage = (pagea) => {
+    // console.log("Page form handle page function : ", pagea);
+    dispatch(handlePages(pagea));
+  };
   useEffect(() => {
     if (sectionid) {
       const newFilter = { ...filter };
@@ -147,26 +157,16 @@ export function ProductGrid() {
       }
       setFilter(newFilter);
     }
-  }, [sectionid, option]);
-  // Using Custom Hook
-  const handleSort = (e, option) => {
-    const sort = { _sort: option.sort, _order: option.order };
-    setSort(sort);
-  };
-
-  const handlePage = (pagea) => {
-    // console.log("Page form handle page function : ", pagea);
-    dispatch(handlePages(pagea));
-  };
-
+  }, [sectionid, option, filter.category]);
+  // console.log(filter.category);
   useEffect(() => {
     const pagination = { _page: pages, _limit: ITEMS_PER_PAGE };
     // console.log("useEffect : ", keyword);
-    console.log("useEffect Category filter : ", filter);
+    // console.log("useEffect Category filter : ", filter);
     dispatch(
       fetchByProductsFiltersAsync({ filter, keyword, sort, pagination })
     );
-  }, [dispatch, filter, keyword, pages, sort, sectionid, option]);
+  }, [dispatch, filter, keyword, pages, sort]);
 
   useEffect(() => {
     dispatch(fetchBrandsAsync());

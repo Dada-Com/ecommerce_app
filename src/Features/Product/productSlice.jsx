@@ -39,7 +39,7 @@ export const fetchByProductsFiltersAsync = createAsyncThunk(
       pagination,
       admin
     );
-    console.log(filter);
+    // console.log(filter);
     // console.log(pagination);
     // The value we return becomes the `fulfilled` action payload
     return response.data;

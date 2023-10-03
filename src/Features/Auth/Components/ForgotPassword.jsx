@@ -40,7 +40,7 @@ const ForgotPassword = () => {
             action="#"
             method="POST"
             onSubmit={handleSubmit((data) => {
-              console.log(data);
+              // console.log(data);
               dispatch(resetPasswordRequestAsync(data.email));
             })}
           >
