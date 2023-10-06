@@ -32,9 +32,6 @@ export default function StripeCheckout() {
         totalAmount: currentOrder.totalAmount,
         orderId: currentOrder.id,
       }),
-      meta: {
-        order_id: currentOrder.id,
-      },
       // this info will go to stripe  => and then to our weebhook
       //so we can conclude that the payment was sucessfull, even if client closes window after pay
     })
@@ -52,20 +49,6 @@ export default function StripeCheckout() {
 
   return (
     <div className="Stripe">
-      {/* {currentOrder === null ? (
-        <div className="mx-6  my-6">
-          <Grid
-            height="150"
-            width="150"
-            color="#4fa94d"
-            ariaLabel="grid-loading"
-            radius="12.5"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-        </div>
-      ) : null} */}
       {currentOrder && currentOrder.totalAmount && clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

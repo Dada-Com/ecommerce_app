@@ -64,7 +64,7 @@ export default function CheckoutForm() {
       confirmParams: {
         // Make sure to change this to your payment completion page
         // return_url: `/ordersucess/${currentOrder.id}`,
-        return_url: `http://localhost:5173/ordersucess/${currentOrder.id}`,
+        return_url: `https://ecom-fullstackapp.vercel.app/ordersucess/${currentOrder.id}`,
       },
     });
     if (error.type === "card_error" || error.type === "validation_error") {
